@@ -772,6 +772,30 @@
       font-family: var(--font-ui);
     }
 
+    /* ===== DESCRIPCIÓN ESPECIAL PARA INTENZE Y ESPECIALES ===== */
+    .card-desc-especial {
+      font-size: 0.8rem;
+      color: var(--gray-dark);
+      margin-top: 6px;
+      line-height: 1.6;
+      font-weight: 400;
+      font-family: var(--font-ui);
+      background: rgba(255, 255, 255, 0.5);
+      padding: 12px 14px;
+      border-radius: 10px;
+      border-left: 3px solid var(--secondary);
+    }
+
+    .card-desc-especial strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .card-desc-especial .emoji-badge {
+      display: inline-block;
+      margin-right: 6px;
+    }
+
     .card-footer {
       padding: 14px 24px 20px;
       display: flex;
@@ -1268,6 +1292,203 @@
     }
 
     /* ============================================ */
+    /* ===== EASTER EGG - MEMORY GAME ===== */
+    /* ============================================ */
+    .egg-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(102, 0, 0, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .egg-overlay.open {
+      display: flex;
+    }
+
+    .egg-modal {
+      max-width: 650px;
+      width: 100%;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 40px 32px 32px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .egg-modal .egg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .egg-modal .egg-header h2 {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+    }
+
+    .egg-modal .egg-header h2 span {
+      color: var(--secondary);
+    }
+
+    .egg-close {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--gray-dark);
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0 8px;
+      font-family: var(--font-ui);
+    }
+    .egg-close:hover {
+      color: var(--primary);
+      transform: rotate(90deg);
+    }
+
+    .egg-subtitle {
+      font-size: 0.85rem;
+      color: var(--gray-dark);
+      margin-bottom: 20px;
+      font-family: var(--font-ui);
+    }
+
+    .egg-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray-dark);
+      font-family: var(--font-ui);
+    }
+
+    .egg-stats span {
+      background: var(--bg);
+      padding: 6px 16px;
+      border-radius: 12px;
+    }
+
+    .egg-stats .egg-moves span {
+      background: var(--primary);
+      color: white;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      background: var(--primary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid var(--primary);
+      user-select: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .memory-card:hover:not(.matched):not(.flipped) {
+      transform: scale(1.05);
+      border-color: var(--secondary);
+    }
+
+    .memory-card.flipped {
+      background: var(--bg);
+      border-color: var(--secondary);
+      transform: scale(0.98);
+    }
+
+    .memory-card.matched {
+      background: var(--bg);
+      border-color: #4CAF50;
+      cursor: default;
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+
+    .memory-card .card-content {
+      display: none;
+    }
+    .memory-card.flipped .card-content,
+    .memory-card.matched .card-content {
+      display: block;
+    }
+
+    .memory-card .card-back {
+      display: block;
+      font-size: 1.8rem;
+      color: white;
+    }
+    .memory-card.flipped .card-back,
+    .memory-card.matched .card-back {
+      display: none;
+    }
+
+    .egg-message {
+      text-align: center;
+      padding: 16px;
+      background: var(--accent-light);
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--secondary);
+      margin-top: 8px;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+      display: none;
+    }
+    .egg-message.show {
+      display: block;
+      animation: pulse 1s ease infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.02); }
+    }
+
+    .egg-reset-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 12px;
+    }
+    .egg-reset-btn:hover {
+      background: var(--secondary);
+    }
+
+    /* ============================================ */
     /* ===== RESPONSIVE ===== */
     /* ============================================ */
     @media (max-width: 768px) {
@@ -1310,6 +1531,18 @@
       }
       .sede-modal h2 {
         font-size: 2.2rem;
+      }
+      .memory-grid {
+        gap: 8px;
+      }
+      .memory-card {
+        font-size: 1.6rem;
+      }
+      .egg-modal {
+        padding: 24px 16px;
+      }
+      .egg-modal .egg-header h2 {
+        font-size: 1.5rem;
       }
     }
 
@@ -1358,6 +1591,17 @@
       footer .brand {
         font-size: 1.8rem;
       }
+      .memory-grid {
+        gap: 6px;
+      }
+      .memory-card {
+        font-size: 1.2rem;
+        border-radius: 8px;
+      }
+      .egg-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -1368,16 +1612,35 @@
 <!-- ============================================ -->
 <div class="sede-overlay" id="sedeOverlay">
   <div class="sede-modal">
-    <!-- 🖼️ LOGO PRINCIPAL — cambia la URL de abajo por la de tu logo -->
     <img class="logo-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-YCt7EYTNBdULEoTP2SoK5d9F4-0P1bHmjLAnWSfN8Q&s" alt="INTELLIGENT NUTRITION Logo">
     <h2>INTELLIGENT <span>NUTRITION</span></h2>
     <p class="subtitle">Elige tu sede para empezar</p>
-
-    <div class="sedes-grid" id="sedesGrid">
-      <!-- Las tarjetas se generan con JavaScript, ver objeto SEDES más abajo -->
-    </div>
-
+    <div class="sedes-grid" id="sedesGrid"></div>
     <button class="sede-btn" id="sedeBtn" disabled>ENTRAR AL MENÚ →</button>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- ===== EASTER EGG - MEMORY GAME ===== -->
+<!-- ============================================ -->
+<div class="egg-overlay" id="eggOverlay">
+  <div class="egg-modal">
+    <div class="egg-header">
+      <h2>🥚 <span>Huevo</span> Secreto</h2>
+      <button class="egg-close" id="eggClose">✕</button>
+    </div>
+    <p class="egg-subtitle">¡Encuentra todas las parejas! 🧠💪</p>
+    <div class="egg-stats">
+      <span class="egg-moves">🔄 Movimientos: <span id="eggMoves">0</span></span>
+      <span>⏱️ Tiempo: <span id="eggTime">0</span>s</span>
+      <span>🎯 Parejas: <span id="eggPairs">0</span>/8</span>
+    </div>
+    <div class="memory-grid" id="memoryGrid"></div>
+    <div class="egg-message" id="eggMessage">
+      🎉 ¡Felicidades! Has encontrado todas las parejas. <br>
+      🏆 Disfruta de un <strong>10% de descuento</strong> en tu próximo pedido.
+    </div>
+    <button class="egg-reset-btn" id="eggReset">🔄 Reiniciar juego</button>
   </div>
 </div>
 
@@ -1388,7 +1651,6 @@
 
 <header class="site-header">
   <a href="#" class="logo">
-    <!-- 🖼️ LOGO DEL HEADER — misma imagen que el logo principal, cámbiala aquí también si la reemplazas -->
     <img class="logo-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-YCt7EYTNBdULEoTP2SoK5d9F4-0P1bHmjLAnWSfN8Q&s" alt="INTELLIGENT NUTRITION Logo">
     <div>
       <span class="logo-text">INTELLIGENT <span>NUTRITION</span></span>
@@ -1457,7 +1719,6 @@
   <div class="cart-items" id="cartItems">
     <p class="cart-empty">Aún no has agregado nada. Elige algo del menú 👀</p>
   </div>
-
   <div class="order-options">
     <label for="tipoPedido">Tipo de pedido</label>
     <select id="tipoPedido">
@@ -1467,7 +1728,6 @@
     </select>
     <input type="text" id="direccion" placeholder="📌 Dirección de entrega" style="display:none;">
   </div>
-
   <div class="cart-summary">
     <div class="summary-row total"><span>Total</span><span id="sumPrice">$0</span></div>
     <button class="confirm-btn" id="confirmBtn" disabled>Confirmar pedido</button>
@@ -1481,16 +1741,11 @@
   <div class="checkout-content">
     <h2>📋 Confirmar <span>pedido</span></h2>
     <p class="checkout-sub">Completa tus datos para finalizar el pedido en <strong id="checkoutSede">Viva - Tunja</strong></p>
-
-    <!-- Campos siempre visibles -->
     <label for="nombreCliente">👤 Nombre completo</label>
     <input type="text" id="nombreCliente" placeholder="Ej: Carlos Rodríguez" required>
-
-    <!-- Campos condicionales (solo para domicilio) -->
     <div id="camposDomicilio" class="campo-condicional">
       <label for="direccionCliente">📍 Dirección de entrega</label>
       <input type="text" id="direccionCliente" placeholder="Ej: Calle 10 #20-30, Barrio Centro">
-
       <label for="metodoPago">💳 Método de pago</label>
       <select id="metodoPago">
         <option value="Efectivo">Efectivo</option>
@@ -1500,10 +1755,8 @@
         <option value="Tarjeta (en app)">Tarjeta (en app)</option>
       </select>
     </div>
-
     <label for="observacionesCliente">💬 Observaciones (opcional)</label>
     <textarea id="observacionesCliente" placeholder="¿Alguna nota para tu pedido? (ej: sin azúcar, extra proteína, etc.)"></textarea>
-
     <div class="checkout-actions">
       <button class="btn-cancel" id="checkoutCancel">Cancelar</button>
       <button class="btn-submit" id="checkoutSubmit">✅ Enviar pedido</button>
@@ -1560,14 +1813,14 @@
       direccion: 'Cra 10 #23-45, Tunja, Boyacá',
       horario: 'Lun–Sáb 7:00–20:00',
       telefono: '573103322428',
-      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7so7TT_lBrmOJpAxvhTQuPV2rIc9ith_QycBoDNcc7oL-NXSjrNBDLMM&s=10', // 🖼️ IMAGEN — foto de la sede Viva - Tunja
+      imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7so7TT_lBrmOJpAxvhTQuPV2rIc9ith_QycBoDNcc7oL-NXSjrNBDLMM&s=10',
       emoji: '🏙️'
     },
     'Sogamoso': {
       direccion: 'Calle 12 #8-30, Sogamoso, Boyacá',
       horario: 'Lun–Sáb 7:00–19:30',
       telefono: '573001234570',
-      imagen: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop&crop=center', // 🖼️ IMAGEN — foto de la sede Sogamoso
+      imagen: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=400&fit=crop&crop=center',
       emoji: '🏔️'
     }
   };
@@ -1577,84 +1830,90 @@
     {
       id:'s1', cat:'smothies', name:'Smothie Oreo',
       desc:'Una deliciosa combinación de galletas Oreo, leche y proteína de vainilla, mezcladas con hielo hasta lograr una textura cremosa, suave y refrescante. Decorado con chocolate líquido y una irresistible base de Oreo triturada.',
-      cal:0, prot:0, carb:0, fat:0, price:22000,
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8n4kc8mVu5X1IQtOj2zzlzK43Ymf0W7lzQnm1YJU0QElf-QYRMXrzKN0&s=10' // 🖼️ IMAGEN — Smothie Oreo
+      cal:480, prot:30, carb:60, fat:18, price:22000,
+      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8n4kc8mVu5X1IQtOj2zzlzK43Ymf0W7lzQnm1YJU0QElf-QYRMXrzKN0&s=10'
     },
     {
       id:'s2', cat:'smothies', name:'Smothie Snickers',
       desc:'Una irresistible mezcla de Snickers, chocolate, leche y proteína de vainilla, licuada con hielo hasta conseguir una textura cremosa, suave y refrescante. Coronado con trozos de Snickers y una barra completa que hacen de cada sorbo una verdadera tentación.',
-      cal:0, prot:0, carb:0, fat:0, price:23000,
-      img:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop&crop=center' // 🖼️ IMAGEN — Smothie Snickers
+      cal:430, prot:30, carb:55, fat:15, price:23000,
+      img:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop&crop=center'
     },
     {
       id:'s3', cat:'smothies', name:'Smothie Frutos Rojos',
       desc:'Una deliciosa combinación de frutos rojos, leche, leche condensada y proteína de vainilla, mezclados con hielo hasta obtener una textura cremosa, suave y refrescante. Decorado con un delicado toque de salsa roja, que realza su atractivo y sabor.',
-      cal:0, prot:0, carb:0, fat:0, price:22000,
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR47ManhwWGrUjLMLoL5G5lbTfN1v8D75fGBZaqUGZ2PfvMeuxBxbeW8SY&s=10' // 🖼️ IMAGEN — Smothie Frutos Rojos
+      cal:330, prot:27, carb:40, fat:8, price:22000,
+      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR47ManhwWGrUjLMLoL5G5lbTfN1v8D75fGBZaqUGZ2PfvMeuxBxbeW8SY&s=10'
     },
     {
       id:'s4', cat:'smothies', name:'Smothie Mango Maracuyá',
       desc:'Una refrescante combinación de mango y maracuyá, mezclados con leche, leche condensada y proteína de vainilla hasta lograr una textura cremosa, suave y perfectamente refrescante. Finalizado con un toque de salsa que realza su presentación y sabor.',
-      cal:0, prot:0, carb:0, fat:0, price:22000,
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBNCgd8oDOYME6TIZwtp3QJ20j61Oy8vudLi443TdxT3nWlParZaNI1k5r&s=10' // 🖼️ IMAGEN — Smothie Mango Maracuyá
+      cal:315, prot:27, carb:36, fat:8, price:22000,
+      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBNCgd8oDOYME6TIZwtp3QJ20j61Oy8vudLi443TdxT3nWlParZaNI1k5r&s=10'
     },
 
     // ---------- PROTEÍNA ----------
     {
       id:'p1', cat:'protein', name:'Protein Coffe Latte',
       desc:'Una deliciosa combinación de café, leche y proteína de vainilla, servida sobre hielo para crear una bebida cremosa, refrescante y llena de sabor. El carácter intenso del café se complementa perfectamente con el suave toque de vainilla.',
-      cal:0, prot:0, carb:0, fat:0, price:20000,
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFs993D--9dh3oGuDucRoFldcpatlLXO0wwqQlnIalbhzuSwRyPqDusxRB&s=10' // 🖼️ IMAGEN — Protein Coffe Latte
+      cal:180, prot:27, carb:10, fat:3, price:20000,
+      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFs993D--9dh3oGuDucRoFldcpatlLXO0wwqQlnIalbhzuSwRyPqDusxRB&s=10'
     },
     {
       id:'p3', cat:'protein', name:'Batido Proteína',
       desc:'Batido de proteína clásico con whey protein.',
-      cal:0, prot:0, carb:0, fat:0, price:18000,
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJNMnKQ0ho3t0S8MXf9XYgNg3ruCvBeFnoJoCs2ZL9eHPApKvQncOnSw&s=10' // 🖼️ IMAGEN — Batido Proteína
+      cal:210, prot:29, carb:14, fat:5, price:18000,
+      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJNMnKQ0ho3t0S8MXf9XYgNg3ruCvBeFnoJoCs2ZL9eHPApKvQncOnSw&s=10'
     },
     {
       id:'p4', cat:'protein', name:'Batido Proteína con Leche de Almendras',
       desc:'Una combinación suave y deliciosa de leche de almendras y proteína de vainilla, servida con hielo para disfrutar de una bebida cremosa, ligera y refrescante.',
-      cal:0, prot:0, carb:0, fat:0, price:22000,
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROETqaAQKwB5zY1znIFWDE22gf_oytA7qyCxo8qBidJQI-VeYFgzaMWGyx&s=10' // 🖼️ IMAGEN — Batido Proteína con Leche de Almendras
+      cal:140, prot:26, carb:5, fat:3, price:22000,
+      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROETqaAQKwB5zY1znIFWDE22gf_oytA7qyCxo8qBidJQI-VeYFgzaMWGyx&s=10'
     },
 
     // ---------- INTENZE ----------
     {
       id:'i1', cat:'intenze', name:'Intenze Curazao',
       desc:'Una combinación refrescante y vibrante de Watermelon y curazao, con un toque de fresa y sal que despierta el paladar. Servido bien frío sobre hielo y con un irresistible borde michelado.',
+      descEspecial: '🔥 <strong>¡Explosión de sabor!</strong> Watermelon + Curazao se fusionan con un toque de fresa y sal. Servido bien frío con borde michelado. <br> 🌟 <em>Perfecto para los que buscan algo diferente y refrescante.</em>',
       cal:0, prot:0, carb:0, fat:0, price:16000,
-      img:'https://entrenamientodiferencial.com/wp-content/uploads/2021/08/FRUIT-PUNCH-1-600x600-2.jpg' // 🖼️ IMAGEN — Intenze Curazao
+      img:'https://entrenamientodiferencial.com/wp-content/uploads/2021/08/FRUIT-PUNCH-1-600x600-2.jpg'
     },
     {
       id:'i2', cat:'intenze', name:'Intenze Granadilla',
       desc:'Una mezcla refrescante y tropical de Watermelon y granadilla, acompañada de un toque de fresa y sal que crea un delicioso contraste entre lo dulce, ácido y salado. Servido bien frío sobre hielo y con un irresistible borde michelado.',
+      descEspecial: '🌴 <strong>Sabor tropical intenso.</strong> Watermelon + Granadilla con un toque de fresa y sal. Borde michelado que realza cada sorbo. <br> 🍹 <em>Ideal para los amantes de lo exótico.</em>',
       cal:0, prot:0, carb:0, fat:0, price:16000,
-      img:'https://entrenamientodiferencial.com/wp-content/uploads/2021/08/FRUIT-PUNCH-1-600x600-2.jpg' // 🖼️ IMAGEN — Intenze Granadilla
+      img:'https://entrenamientodiferencial.com/wp-content/uploads/2021/08/FRUIT-PUNCH-1-600x600-2.jpg'
     },
     {
       id:'i3', cat:'intenze', name:'Intenze Strawberry',
       desc:'Una combinación intensa y refrescante de Watermelon y fresa, servida bien fría sobre hielo y acompañada de un irresistible borde michelado de fresa y sal. Una mezcla vibrante de sabores dulces, frutales y ligeramente salados que despierta el paladar.',
+      descEspecial: '🍓 <strong>¡Fresca y vibrante!</strong> Watermelon + Fresa con borde michelado de fresa y sal. Dulce, frutal y ligeramente salado. <br> ✨ <em>La opción perfecta para refrescarte con estilo.</em>',
       cal:0, prot:0, carb:0, fat:0, price:16000,
-      img:'https://entrenamientodiferencial.com/wp-content/uploads/2021/08/FRUIT-PUNCH-1-600x600-2.jpg' // 🖼️ IMAGEN — Intenze Strawberry
+      img:'https://entrenamientodiferencial.com/wp-content/uploads/2021/08/FRUIT-PUNCH-1-600x600-2.jpg'
     },
 
     // ---------- ESPECIALES ----------
     {
       id:'e1', cat:'especiales', name:'Hulk',
       desc:'Una combinación refrescante y explosiva de Dylator y jugo de naranja, acompañada de un toque de sal y un irresistible borde michelado de fresa. Servido bien frío sobre hielo para crear un contraste de sabores frutales, cítricos y ligeramente salados.',
+      descEspecial: '💚 <strong>¡La bestia verde!</strong> Dylator + jugo de naranja con borde michelado de fresa. Explosión de sabor cítrico y refrescante. <br> 🦸‍♂️ <em>El favorito de los que buscan energía y sabor.</em>',
       cal:0, prot:0, carb:0, fat:0, price:18000,
-      img:'https://rdgastronomic.com/wp-content/uploads/2025/03/7828d827da95f1e039ab1063299a10fa-e1746185026995.jpg' // 🖼️ IMAGEN — Hulk
+      img:'https://rdgastronomic.com/wp-content/uploads/2025/03/7828d827da95f1e039ab1063299a10fa-e1746185026995.jpg'
     },
     {
       id:'e2', cat:'especiales', name:'The King',
       desc:'Una combinación intensa y refrescante de God of Wild, Red Bull y curazao, acompañada de un toque de fresa y sal que crea un irresistible borde michelado. Servido bien frío sobre hielo para lograr un contraste vibrante de sabores frutales, cítricos y ligeramente salados.',
+      descEspecial: '👑 <strong>La realeza del sabor.</strong> God of Wild + Red Bull + Curazao con borde michelado. Intenso, vibrante y lleno de energía. <br> ⚡ <em>Para los que dominan el día con estilo.</em>',
       cal:0, prot:0, carb:0, fat:0, price:25000,
-      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0m6d8Af1f6tdbA7N1M9xl8fgt-TDAlsahegDJXxSTnjZEY0LYJWh6egc&s=10' // 🖼️ IMAGEN — The King
+      img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0m6d8Af1f6tdbA7N1M9xl8fgt-TDAlsahegDJXxSTnjZEY0LYJWh6egc&s=10'
     },
   ];
 
   const CAT_LABEL = {smothies:'Smothie', protein:'Proteína', intenze:'Intenze', especiales:'Especial'};
+  const NO_NUTRITION_CATS = ['intenze', 'especiales'];
 
   // ============================================
   // ===== ESTADO GLOBAL =====
@@ -1689,7 +1948,6 @@
   const tipoPedidoSelect = document.getElementById('tipoPedido');
   const direccionInput = document.getElementById('direccion');
 
-  // Checkout modal
   const checkoutModal = document.getElementById('checkoutModal');
   const checkoutSede = document.getElementById('checkoutSede');
   const nombreCliente = document.getElementById('nombreCliente');
@@ -1699,6 +1957,187 @@
   const observacionesCliente = document.getElementById('observacionesCliente');
   const checkoutCancel = document.getElementById('checkoutCancel');
   const checkoutSubmit = document.getElementById('checkoutSubmit');
+
+  // ============================================
+  // ===== EASTER EGG - MEMORY GAME =====
+  // ============================================
+  const eggOverlay = document.getElementById('eggOverlay');
+  const eggClose = document.getElementById('eggClose');
+  const eggReset = document.getElementById('eggReset');
+  const memoryGrid = document.getElementById('memoryGrid');
+  const eggMoves = document.getElementById('eggMoves');
+  const eggTime = document.getElementById('eggTime');
+  const eggPairs = document.getElementById('eggPairs');
+  const eggMessage = document.getElementById('eggMessage');
+
+  // Emojis temáticos (8 pares)
+  const EMOJIS = ['💪', '🏋️', '🥑', '🥗', '🍎', '🥤', '🏃', '🧘'];
+  let gameCards = [];
+  let flippedCards = [];
+  let matchedPairs = 0;
+  let moves = 0;
+  let timer = 0;
+  let timerInterval = null;
+  let isLocked = false;
+
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function initGame() {
+    // Reset estado
+    clearInterval(timerInterval);
+    timer = 0;
+    moves = 0;
+    matchedPairs = 0;
+    flippedCards = [];
+    isLocked = false;
+    eggMessage.classList.remove('show');
+
+    // Crear pares
+    const deck = [...EMOJIS, ...EMOJIS].map((emoji, index) => ({
+      id: index,
+      emoji: emoji,
+      flipped: false,
+      matched: false
+    }));
+    gameCards = shuffleArray(deck);
+
+    renderGame();
+    updateStats();
+    startTimer();
+  }
+
+  function renderGame() {
+    memoryGrid.innerHTML = gameCards.map((card, index) => `
+      <div class="memory-card ${card.flipped ? 'flipped' : ''} ${card.matched ? 'matched' : ''}" data-index="${index}">
+        <span class="card-back">❓</span>
+        <span class="card-content">${card.emoji}</span>
+      </div>
+    `).join('');
+  }
+
+  function updateStats() {
+    eggMoves.textContent = moves;
+    eggTime.textContent = timer;
+    eggPairs.textContent = matchedPairs;
+  }
+
+  function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      timer++;
+      eggTime.textContent = timer;
+    }, 1000);
+  }
+
+  function checkWin() {
+    if (matchedPairs === EMOJIS.length) {
+      clearInterval(timerInterval);
+      eggMessage.classList.add('show');
+      showToast('🎉 ¡Huevo de pascua completado! Disfruta tu 10% de descuento.');
+    }
+  }
+
+  function handleCardClick(e) {
+    const cardEl = e.target.closest('.memory-card');
+    if (!cardEl) return;
+    if (isLocked) return;
+
+    const index = parseInt(cardEl.dataset.index);
+    const card = gameCards[index];
+
+    // Si ya está volteada o emparejada, ignorar
+    if (card.flipped || card.matched) return;
+    // Si ya hay 2 cartas volteadas, ignorar
+    if (flippedCards.length >= 2) return;
+
+    // Voltear carta
+    card.flipped = true;
+    flippedCards.push(index);
+    renderGame();
+
+    // Si hay 2 cartas volteadas, verificar match
+    if (flippedCards.length === 2) {
+      isLocked = true;
+      moves++;
+      updateStats();
+
+      const idx1 = flippedCards[0];
+      const idx2 = flippedCards[1];
+      const card1 = gameCards[idx1];
+      const card2 = gameCards[idx2];
+
+      if (card1.emoji === card2.emoji && idx1 !== idx2) {
+        // Match!
+        card1.matched = true;
+        card2.matched = true;
+        matchedPairs++;
+        updateStats();
+        flippedCards = [];
+        isLocked = false;
+        renderGame();
+        checkWin();
+      } else {
+        // No match - voltear de nuevo después de un delay
+        setTimeout(() => {
+          card1.flipped = false;
+          card2.flipped = false;
+          flippedCards = [];
+          isLocked = false;
+          renderGame();
+        }, 800);
+      }
+    }
+  }
+
+  // Event listener para el juego de memoria
+  memoryGrid.addEventListener('click', handleCardClick);
+
+  // Función para abrir el juego (huevo de pascua)
+  function openEggGame() {
+    initGame();
+    eggOverlay.classList.add('open');
+  }
+
+  function closeEggGame() {
+    eggOverlay.classList.remove('open');
+    clearInterval(timerInterval);
+  }
+
+  eggClose.addEventListener('click', closeEggGame);
+  eggReset.addEventListener('click', initGame);
+  eggOverlay.addEventListener('click', (e) => {
+    if (e.target === eggOverlay) closeEggGame();
+  });
+
+  // ============================================
+  // ===== CÓDIGO SECRETO (EASTER EGG) =====
+  // ============================================
+  let secretBuffer = '';
+  const SECRET_WORD = 'intelligent';
+
+  document.addEventListener('keydown', (e) => {
+    // Ignorar si estamos en un input o textarea
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+
+    const char = e.key.toLowerCase();
+    if (char.length === 1 && char >= 'a' && char <= 'z') {
+      secretBuffer += char;
+      if (secretBuffer.length > SECRET_WORD.length) {
+        secretBuffer = secretBuffer.slice(-SECRET_WORD.length);
+      }
+      if (secretBuffer === SECRET_WORD) {
+        secretBuffer = '';
+        openEggGame();
+        showToast('🥚 ¡Has encontrado el huevo de pascua!');
+      }
+    }
+  });
 
   // ============================================
   // ===== RENDER SEDES =====
@@ -1794,45 +2233,64 @@
   function money(n){ return '$' + n.toLocaleString('es-CO'); }
 
   function renderCards(){
-    grid.innerHTML = ITEMS.map(item => `
-      <article class="card" data-cat="${item.cat}">
-        <img class="card-image" src="${item.img}" alt="${item.name}" loading="lazy">
-        <div class="card-top">
-          <span class="card-cat">${CAT_LABEL[item.cat]}</span>
-          <h3>${item.name}</h3>
-          <p class="card-desc">${item.desc}</p>
-        </div>
-        <div class="nutrition">
-          <div class="nutrition-title">📊 Información nutricional</div>
-          <div class="nutrition-grid">
-            <div class="nutrition-item">
-              <span class="label">Calorías</span>
-              <span class="value">${item.cal}</span>
-              <span class="unit">kcal</span>
-            </div>
-            <div class="nutrition-item">
-              <span class="label">Proteína</span>
-              <span class="value">${item.prot}</span>
-              <span class="unit">g</span>
-            </div>
-            <div class="nutrition-item">
-              <span class="label">Carbos</span>
-              <span class="value">${item.carb}</span>
-              <span class="unit">g</span>
-            </div>
-            <div class="nutrition-item">
-              <span class="label">Grasa</span>
-              <span class="value">${item.fat}</span>
-              <span class="unit">g</span>
+    grid.innerHTML = ITEMS.map(item => {
+      const showNutrition = !NO_NUTRITION_CATS.includes(item.cat);
+
+      let nutritionHtml = '';
+      if (showNutrition) {
+        nutritionHtml = `
+          <div class="nutrition">
+            <div class="nutrition-title">📊 Información nutricional</div>
+            <div class="nutrition-grid">
+              <div class="nutrition-item">
+                <span class="label">Calorías</span>
+                <span class="value">${item.cal}</span>
+                <span class="unit">kcal</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="label">Proteína</span>
+                <span class="value">${item.prot}</span>
+                <span class="unit">g</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="label">Carbos</span>
+                <span class="value">${item.carb}</span>
+                <span class="unit">g</span>
+              </div>
+              <div class="nutrition-item">
+                <span class="label">Grasa</span>
+                <span class="value">${item.fat}</span>
+                <span class="unit">g</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="card-footer">
-          <span class="price">${money(item.price)}</span>
-          <button class="add-btn" data-id="${item.id}">+ Agregar</button>
-        </div>
-      </article>
-    `).join('');
+        `;
+      } else {
+        const descEspecial = item.descEspecial || item.desc;
+        nutritionHtml = `
+          <div class="nutrition" style="background: var(--surface); border-top: 2px solid var(--secondary);">
+            <div class="nutrition-title" style="color: var(--secondary);">🌟 Sobre este producto</div>
+            <div class="card-desc-especial">${descEspecial}</div>
+          </div>
+        `;
+      }
+
+      return `
+        <article class="card" data-cat="${item.cat}">
+          <img class="card-image" src="${item.img}" alt="${item.name}" loading="lazy">
+          <div class="card-top">
+            <span class="card-cat">${CAT_LABEL[item.cat]}</span>
+            <h3>${item.name}</h3>
+            <p class="card-desc">${item.desc}</p>
+          </div>
+          ${nutritionHtml}
+          <div class="card-footer">
+            <span class="price">${money(item.price)}</span>
+            <button class="add-btn" data-id="${item.id}">+ Agregar</button>
+          </div>
+        </article>
+      `;
+    }).join('');
   }
   renderCards();
 
@@ -1962,7 +2420,6 @@
     direccionCliente.value = '';
     observacionesCliente.value = '';
 
-    // Mostrar/ocultar campos de domicilio
     if (tipoPedido === 'Domicilio') {
       camposDomicilio.classList.add('visible');
       direccionCliente.required = true;
@@ -2007,7 +2464,6 @@
       return;
     }
 
-    // Validar campos de domicilio si aplica
     let direccion = 'N/A';
     let pago = 'N/A';
     if (tipoPedido === 'Domicilio') {
@@ -2028,7 +2484,6 @@
 
     const infoSede = SEDES[sedeSeleccionada];
 
-    // Generar resumen del pedido
     let total = 0;
     let resumen = '';
     ids.forEach(id => {
@@ -2039,7 +2494,6 @@
       resumen += `  • ${item.name}  x${qty}  =  ${money(subtotal)}\n`;
     });
 
-    // Construir mensaje para WhatsApp
     let mensaje = ' *NUEVO PEDIDO - INTELLIGENT NUTRITION*\n';
     mensaje += '━'.repeat(32) + '\n\n';
 
@@ -2069,10 +2523,8 @@
     mensaje += ' *¡Gracias por tu pedido!*\n';
     mensaje += `Te esperamos en ${sedeSeleccionada}`;
 
-    // Enviar por WhatsApp
     enviarPorWhatsApp(mensaje);
 
-    // Limpiar carrito
     setTimeout(() => {
       Object.keys(cart).forEach(id => cart[id] = 0);
       renderCart();
